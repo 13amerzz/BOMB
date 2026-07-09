@@ -5,11 +5,12 @@ const message = document.getElementById("message");
 let score = 0;
 let gameOver = false;
 let basketLeft = 200; // track basket position
+let targetLeft = basketLeft; // target position for smooth animation
 
 // Keyboard controls (laptop)
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft") moveBasket(-30);
-  if (e.key === "ArrowRight") moveBasket(30);
+  if (e.key === "ArrowLeft") moveBasket(-50);
+  if (e.key === "ArrowRight") moveBasket(50);
 });
 
 // Swipe controls (phone)
@@ -29,9 +30,9 @@ function handleSwipe() {
   let diff = touchEndX - touchStartX;
   if (Math.abs(diff) > 50) { // threshold
     if (diff < 0) {
-      moveBasket(-50); // swipe left
+      moveBasket(-100); // swipe left
     } else {
-      moveBasket(50); // swipe right
+      moveBasket(100); // swipe right
     }
   }
 }
@@ -39,18 +40,26 @@ function handleSwipe() {
 function moveBasket(offset) {
   if (gameOver) return;
 
-  basketLeft += offset;
+  targetLeft = basketLeft + offset;
 
   // keep basket inside screen
-  if (basketLeft < 0) basketLeft = 0;
-  if (basketLeft > window.innerWidth - basket.offsetWidth) {
-    basketLeft = window.innerWidth - basket.offsetWidth;
+  if (targetLeft < 0) targetLeft = 0;
+  if (targetLeft > window.innerWidth - basket.offsetWidth) {
+    targetLeft = window.innerWidth - basket.offsetWidth;
   }
-
-  basket.style.left = basketLeft + "px";
 }
 
-// Create falling emoji
+// Smooth animation loop
+function animateBasket() {
+  if (Math.abs(targetLeft - basketLeft) > 1) {
+    basketLeft += (targetLeft - basketLeft) * 0.2; // easing
+    basket.style.left = basketLeft + "px";
+  }
+  requestAnimationFrame(animateBasket);
+}
+animateBasket();
+
+// Falling emojis (same as before)
 function createEmoji() {
   if (gameOver) return;
 
@@ -69,7 +78,6 @@ function createEmoji() {
     const basketRect = basket.getBoundingClientRect();
     const emojiRect = emoji.getBoundingClientRect();
 
-    // collision detection
     if (
       emojiRect.bottom >= basketRect.top &&
       emojiRect.left >= basketRect.left &&
@@ -85,7 +93,6 @@ function createEmoji() {
       clearInterval(fallInterval);
     }
 
-    // missed emoji
     if (currentTop > window.innerHeight) {
       if (emoji.textContent !== "💣") {
         score--;
@@ -98,12 +105,10 @@ function createEmoji() {
   }, 30);
 }
 
-// End game
 function endGame() {
   gameOver = true;
   message.style.display = "block";
   message.textContent = "💣 Game Over!";
 }
 
-// spawn emojis every second
 setInterval(createEmoji, 1000);
