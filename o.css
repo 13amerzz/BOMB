@@ -13,11 +13,12 @@ body {
 
 #basket {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 120px;   /* ✅ lifted more above the arrows */
+  left: 200px;     /* start at fixed position */
   font-size: 8vw;
 }
+
+
 
 .emoji {
   position: absolute;
