@@ -13,16 +13,14 @@ body {
 
 #basket {
   position: absolute;
-  bottom: 120px;   /* ✅ lifted more above the arrows */
-  left: 200px;     /* start at fixed position */
+  bottom: 120px;   /* sits above bottom */
+  left: 200px;     /* starting position */
   font-size: 8vw;
 }
 
-
-
 .emoji {
   position: absolute;
-  top: -40px;
+  top: 0px;
   font-size: 6vw;
 }
 
@@ -44,22 +42,4 @@ body {
   color: red;
   font-weight: bold;
   display: none;
-}
-
-.controls {
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.controls button {
-  padding: 15px 25px;
-  font-size: 5vw;
-  border: none;
-  border-radius: 10px;
-  background: #ff69b4;
-  color: white;
-  cursor: pointer;
 }
