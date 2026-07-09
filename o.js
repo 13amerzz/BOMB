@@ -17,11 +17,11 @@ let touchStartX = 0;
 let touchEndX = 0;
 
 document.addEventListener("touchstart", (e) => {
-  touchStartX = e.changedTouches[0].screenX;
+  touchStartX = e.changedTouches[0].clientX;
 });
 
 document.addEventListener("touchend", (e) => {
-  touchEndX = e.changedTouches[0].screenX;
+  touchEndX = e.changedTouches[0].clientX;
   handleSwipe();
 });
 
@@ -83,3 +83,27 @@ function createEmoji() {
       }
       emoji.remove();
       clearInterval(fallInterval);
+    }
+
+    // missed emoji
+    if (currentTop > window.innerHeight) {
+      if (emoji.textContent !== "💣") {
+        score--;
+        if (score < 0) score = 0;
+        scoreBoard.textContent = "Score: " + score;
+      }
+      emoji.remove();
+      clearInterval(fallInterval);
+    }
+  }, 30);
+}
+
+// End game
+function endGame() {
+  gameOver = true;
+  message.style.display = "block";
+  message.textContent = "💣 Game Over!";
+}
+
+// spawn emojis every second
+setInterval(createEmoji, 1000);
