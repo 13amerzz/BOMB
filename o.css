@@ -1,7 +1,7 @@
-/* Background: fun arcade vibe */
+/* Background: soft gradient */
 body {
   margin: 0;
-  background: linear-gradient(135deg, #1e3c72, #2a5298); /* deep blue gradient */
+  background: linear-gradient(135deg, #3a6186, #89253e); /* muted blue-red gradient */
   font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
 }
@@ -13,7 +13,7 @@ body {
   height: 100vh;
 }
 
-/* Basket styling with neon glow */
+/* Basket styling with soft glow */
 #basket {
   position: absolute;
   bottom: 120px;
@@ -21,37 +21,37 @@ body {
   transform: translateX(-50%);
   font-size: 8vw;
   transition: left 0.2s ease;
-  text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea, 0 0 30px #00ffea;
+  text-shadow: 0 0 6px rgba(0,255,234,0.6), 0 0 12px rgba(0,255,234,0.4);
 }
 
-/* Falling emojis with glow */
+/* Falling emojis with gentle highlight */
 .emoji {
   position: absolute;
   top: 0px;
   font-size: 6vw;
-  text-shadow: 0 0 8px #fff, 0 0 15px #ff69b4, 0 0 25px #ff69b4;
+  text-shadow: 0 0 5px rgba(255,255,255,0.6), 0 0 10px rgba(255,105,180,0.4);
 }
 
-/* Scoreboard with neon yellow */
+/* Scoreboard with soft yellow */
 #scoreBoard {
   position: absolute;
   top: 15px;
   left: 20px;
   font-size: 5vw;
-  color: #fff700;
+  color: #ffe066; /* softer yellow */
   font-weight: bold;
-  text-shadow: 0 0 10px #fff700, 0 0 20px #fff700, 0 0 30px #fff700;
+  text-shadow: 0 0 6px rgba(255,224,102,0.6);
 }
 
-/* Game over message with neon red */
+/* Game over message with softer red */
 #message {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 7vw;
-  color: #ff3b3b;
+  color: #ff4d4d;
   font-weight: bold;
   display: none;
-  text-shadow: 0 0 10px #ff3b3b, 0 0 20px #ff3b3b, 0 0 30px #ff3b3b;
+  text-shadow: 0 0 8px rgba(255,77,77,0.6);
 }
